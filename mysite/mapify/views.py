@@ -80,7 +80,9 @@ def getplace_name_from_id(placeid):
 @csrf_exempt
 def post_current_data(request):
 	if request.method == "POST":
-		json_data = request.POST
+		js_data = request.POST
+		json_string = js_data["Json"]
+		json_data=json.dumps(json_string)
 		print(json_data)
 		tm = TrafficModel()
 		tm.latitude = float(json_data["latitude"])
