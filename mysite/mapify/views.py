@@ -22,8 +22,8 @@ def request_dynamic(request):
 	print('hello')
 	if request.method == "POST":
 		json_data = request.POST
-		latitude = json_data["latitude"]
-		longitude = json_data["longitude"]
+		latitude = float(json_data["latitude"])
+		longitude = float(json_data["longitude"])
 		ROADS_API_URL = "https://roads.googleapis.com/v1/nearestRoads?points="
 		for i in range(51):
 			x_latitude = float(latitude) + latitude_CONSTANT*(math.cos(3.14*0.02*i))
@@ -83,10 +83,10 @@ def post_current_data(request):
 		json_data = request.POST
 		print(json_data)
 		tm = TrafficModel()
-		tm.latitude = json_data["latitude"]
-		tm.longitude = json_data["longitude"]
+		tm.latitude = float(json_data["latitude"])
+		tm.longitude = float(json_data["longitude"])
 		print("ste3")
-		tm.avg_speed = json_data["avg_speed"]
+		tm.avg_speed = float(json_data["avg_speed"])
 		tm.record_time = timezone.now()
 		tm.place_id = get_place_id(json_data["latitude"], json_data["longitude"])
 		tm.save()
